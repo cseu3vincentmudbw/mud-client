@@ -1,5 +1,5 @@
 // Create global styles using styled components to be injected into components.
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 :root {
@@ -36,7 +36,7 @@ label {
    font-weight: bold;
 }
 small {
-    font-size: 1.2rem;
+   font-size: 1.2rem;
 }
 button {
    cursor: pointer;
@@ -52,8 +52,13 @@ button {
    color: white;
    }
    :focus {
-       outline: none;
+      outline: none;
    }
+   :disabled,[disabled] {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: initial
+}
 }
 input, textarea, select {
    font-size: 1.5rem;
