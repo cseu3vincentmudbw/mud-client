@@ -5,11 +5,15 @@ import PrivateRoute from "./components/PrivateRoute";
 import Home from "./components/features/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import Navbar from "./components/layout/Navbar";
+import Player from "./components/features/Player";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <>
+    <div>
       <GlobalStyle />
+      <Navbar />
       <PrivateRoute exact path="/" render={props => <Home {...props} />} />
       <Route
         path="/register"
@@ -23,7 +27,13 @@ function App() {
           return <Login {...props} />;
         }}
       />
-    </>
+      <Route
+        path="/play"
+        render={props => {
+          return <Player {...props} />;
+        }}
+      />
+    </div>
   );
 }
 
