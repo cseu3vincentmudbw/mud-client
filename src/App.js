@@ -3,10 +3,15 @@ import { Route } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyles";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import Navbar from './components/layout/Navbar';
+import Player from './components/features/Player';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <>
+    <div>
+
+      <Navbar />
       <GlobalStyle />
       <Route
         path="/register"
@@ -20,7 +25,14 @@ function App() {
           return <Login {...props} />;
         }}
       />
-    </>
+       <Route
+        path="/play"
+        render={props => {
+          return <Player {...props} />;
+        }}
+      />
+    </div>
+
   );
 }
 
