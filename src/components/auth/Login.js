@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import axios from "../../axios";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { LoginWrapperDiv } from "../../styles/userAuthStyles";
 import { LoaderDiv } from "../../styles/Loader";
@@ -22,13 +22,13 @@ export default function Login(props) {
     axios
       .post("https://legend-mud.herokuapp.com/api/login/", user)
       .then(res => {
-        setRequesting(false)
+        setRequesting(false);
         localStorage.setItem("token", res.data.key);
-        props.history.push("/");
+        window.location.href ="/";
       })
       .catch(err => {
-        setRequesting(false)
-        alert("Please check your credentials and try again")
+        setRequesting(false);
+        alert("Please check your credentials and try again");
       });
   };
   return (
@@ -77,7 +77,9 @@ export default function Login(props) {
             />
           </div>
           <div>
-            <button disabled={requesting ? true : false} type="submit">Login</button>
+            <button disabled={requesting ? true : false} type="submit">
+              Login
+            </button>
             <p>
               Don't have an account yet? <Link to="/register">Join Now</Link>
             </p>

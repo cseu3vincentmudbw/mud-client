@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import axios from "../../axios";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { SignupWrapperDiv } from "../../styles/userAuthStyles";
 import { LoaderDiv } from "../../styles/Loader";
@@ -46,12 +46,12 @@ export default function Register(props) {
       axios
         .post("https://legend-mud.herokuapp.com/api/registration/", user)
         .then(res => {
-          setRequesting(false)
+          setRequesting(false);
           localStorage.setItem("token", res.data.key);
-          props.history.push("/");
+          window.location.href = "/";
         })
         .catch(err => {
-          setRequesting(false)
+          setRequesting(false);
           alert("Please try a different username");
         });
     }
@@ -105,8 +105,8 @@ export default function Register(props) {
               <small style={style}>Passwords do not match</small>
             ) : (
               <small>
-                Minimum of 8 characters and must not be a
-                common phrase like 'helloworld', 'password' etc
+                Minimum of 8 characters and must not be a common phrase like
+                'helloworld', 'password' etc
               </small>
             )}
           </div>
@@ -132,7 +132,9 @@ export default function Register(props) {
               <Link to="/terms-and-conditions">Terms and Conditions</Link> &{" "}
               <Link to="/privacy-policy">Privacy Policy</Link>
             </p>
-            <button disabled={requesting ? true : false} type="submit">Join Now</button>
+            <button disabled={requesting ? true : false} type="submit">
+              Join Now
+            </button>
             <p>
               Already have an account? <Link to="/login">Sign In</Link>
             </p>
