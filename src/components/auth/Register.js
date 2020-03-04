@@ -2,10 +2,12 @@ import React, { useRef, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { SignupWrapperDiv } from "../../styles/userAuthStyles";
+import { LoaderDiv } from "../../styles/Loader";
 
 export default function Register(props) {
   const [unmatch, setUnmatch] = useState(false);
   const [clength, setClength] = useState(false);
+  const [requesting, setRequesting] = useState(false);
 
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
@@ -34,6 +36,7 @@ export default function Register(props) {
   const onSubmit = event => {
     event.preventDefault();
     if (checkMatch()) {
+      setRequesting(true);
       const user = {
         username: usernameRef.current.value,
         email: emailRef.current.value,
@@ -41,12 +44,14 @@ export default function Register(props) {
         password2: password2Ref.current.value
       };
       axios
-        .post("https://lambda-mud-test.herokuapp.com/api/registration/", user)
+        .post("https://legend-mud.herokuapp.com/api/registration/", user)
         .then(res => {
+          setRequesting(false)
           localStorage.setItem("token", res.data.key);
           props.history.push("/");
         })
         .catch(err => {
+          setRequesting(false)
           alert("Please try a different username");
         });
     }
@@ -55,6 +60,14 @@ export default function Register(props) {
     <SignupWrapperDiv>
       <section>
         <h3>Create an account</h3>
+        {requesting ? (
+          <LoaderDiv>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </LoaderDiv>
+        ) : null}
         <form onSubmit={onSubmit}>
           <div>
             <label>Username</label>
@@ -91,7 +104,10 @@ export default function Register(props) {
             {unmatch ? (
               <small style={style}>Passwords do not match</small>
             ) : (
-              <small>Password must contain minimum of 8 characters </small>
+              <small>
+                Minimum of 8 characters and must not be a
+                common phrase like 'helloworld', 'password' etc
+              </small>
             )}
           </div>
           <div>
@@ -116,7 +132,7 @@ export default function Register(props) {
               <Link to="/terms-and-conditions">Terms and Conditions</Link> &{" "}
               <Link to="/privacy-policy">Privacy Policy</Link>
             </p>
-            <button type="submit">Join Now</button>
+            <button disabled={requesting ? true : false} type="submit">Join Now</button>
             <p>
               Already have an account? <Link to="/login">Sign In</Link>
             </p>
