@@ -8,7 +8,7 @@ export default function() {
 
   const instance = axios.create({
     headers: {
-      Authorization: token
+      Authorization: `Token ${token}`
     }
   });
 
