@@ -13,11 +13,14 @@ import {
   useWindowSize
 } from '@react-hook/window-size'
 
+const baseUrl = `https://legend-mud.herokuapp.com` 
+
 
 function Dashboard() {
 
   const [moveErrorMsg, setMoveErrorMsg] = useState();
   const [moveInfo, setMoveInfo] = useState({
+    uuid: "",
     name: "",
     title: "",
     description: "",
@@ -31,16 +34,13 @@ function Dashboard() {
   useEffect(() => {
 
     axiosWithAuth().get(
-      'https://lambda-mud-test.herokuapp.com/api/adv/init'
+      `${baseUrl}/api/adv/init`
     )
       .then(res => {
         console.log("init res", res.data);
         setMoveInfo(res.data);
         setMoveErrorMsg(res.data.error_msg);
-
-
       })
-
       .catch(err => {
         console.log(err.message)
       })
@@ -53,7 +53,7 @@ function Dashboard() {
 
     axiosWithAuth()
       .post(
-        "https://lambda-mud-test.herokuapp.com/api/adv/move/", { direction: `${dir}` }
+        `${baseUrl}/api/adv/move/`, { direction: `${dir}` }
       )
       .then(res => {
         console.log("move result", res.data);
@@ -155,7 +155,13 @@ function Dashboard() {
           </div>
 
           <div className="charContainer">
-            <img src={character} className="char" key="key" alt="character" style={{ bottom: pos[1] + "px", left: pos[0] + "px" }}></img>
+            <img 
+              src={character} 
+              className="char"
+              key="key"
+              alt="character"
+              style={{ bottom: pos[1] + "px", left: pos[0] + "px" }}>
+          </img>
           </div>
 
         </div>{/*end map*/}
