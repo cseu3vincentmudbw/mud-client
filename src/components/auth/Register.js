@@ -5,8 +5,7 @@ import { SignupWrapperDiv } from "../../styles/userAuthStyles";
 import { LoaderDiv } from "../../styles/Loader";
 import { AuthContext } from '../../contexts';
 
-const baseUrl = `http://127.0.0.1:8000` 
-
+import baseUrl from '../../utils';
 
 export default function Register(props) {
   const [unmatch, setUnmatch] = useState(false);

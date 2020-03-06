@@ -89,7 +89,6 @@ const Grid = (props) =>  {
         }
         return false;
       } catch(err) {
-        console.log(err.message)
         return false
       }
     }
