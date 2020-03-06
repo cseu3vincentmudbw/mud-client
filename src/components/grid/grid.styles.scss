@@ -1,0 +1,80 @@
+.grid-wrapper {
+  position: relative;
+  padding: 5px;
+}
+
+.grid-table {
+  width: 800px;
+  margin: 5px;
+  position: relative;
+}
+
+.sprite {
+}
+
+.grass{
+  background-color: green;
+  background-image: url("../../assets/GrassLight.png");
+  background-size: contain;
+
+}
+
+.wall{
+  background-color: green;
+  background-image: url("../../assets/GrassTile.png");
+  background-size: contain;
+
+}
+
+.pathNSZ{
+  background-image: url("../../assets/PathNSZ.png");
+  background-size: contain;
+}
+.bridgeWE{
+  background-color: green;
+  background-image: url("../../assets/BridgeWE.png");
+  background-size: contain;
+
+}
+.bridgeNS{
+  background-color: green;
+  background-image: url("../../assets/BridgeNS.png");
+  background-size: contain;
+
+}
+.pathNSStairs{
+  background-color: green;
+  background-image: url("../../assets/PathNSStairs.png");
+  background-size: contain;
+}
+
+.house{
+  background-color: green;
+  border-radius: 3px;
+  background-image: url("../../assets/House.png");
+  background-size: contain;
+}
+.pathWE{
+  background-image: url("../../assets/PathWE.png");
+  background-size: contain;
+
+}
+.pathWEThin{
+  background-image: url("../../assets/PathWEThin.png");
+  background-size: contain;
+}
+.pathNS{
+  background-image: url("../../assets/PathNS.png");
+  background-size: contain;
+
+}
+
+.path{
+  background-image: url("../../assets/Path.png");
+  background-size: contain;
+}
+
+.canal {
+  background-image: url("../../assets/Canal.png");
+  background-size: contain;
+}

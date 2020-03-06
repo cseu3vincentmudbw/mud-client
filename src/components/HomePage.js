@@ -9,16 +9,14 @@ import Map from "../components/Map";
 import character from "../assets/character.png"
 import Confetti from 'react-confetti';
 
-import Grid from './grid/Grid';
-
-//import World from "../components/World";
+import World from "./world/World";
 
 import {
   useWindowSize
 } from '@react-hook/window-size'
 
-// const baseUrl = `https://legend-mud.herokuapp.com` 
-const baseUrl = `http://127.0.0.1:8000` 
+const baseUrl = `https://legend-mud.herokuapp.com` 
+
 
 function Dashboard() {
 
@@ -53,8 +51,8 @@ function Dashboard() {
 
 
   let increments = 80
-  const Move = (dir) => {
 
+  const Move = (dir) => {
     axiosWithAuth()
       .post(
         `${baseUrl}/api/adv/move/`, { direction: `${dir}` }
@@ -144,7 +142,7 @@ function Dashboard() {
       <div className="dashboard-div" key="key">
 
         <div className="map">
-          <Grid />
+          <Map />
           <div className="confetti">
             {moveInfo.title === "The Small Rift of Flame" ?
               <div style={{ width: 50 }}>

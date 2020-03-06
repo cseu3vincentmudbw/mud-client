@@ -18,7 +18,7 @@ function Grid(props) {
 
     })
 
-  }, [])
+  }, [roomNames])
 
 
   const Tile = function (x, y) {

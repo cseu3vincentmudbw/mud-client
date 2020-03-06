@@ -9,9 +9,7 @@ import Map from "../components/Map";
 import character from "../assets/character.png"
 import Confetti from 'react-confetti';
 
-import Grid from './grid/Grid';
-
-//import World from "../components/World";
+import World from "../components/World";
 
 import {
   useWindowSize
@@ -144,7 +142,7 @@ function Dashboard() {
       <div className="dashboard-div" key="key">
 
         <div className="map">
-          <Grid />
+          <World />
           <div className="confetti">
             {moveInfo.title === "The Small Rift of Flame" ?
               <div style={{ width: 50 }}>

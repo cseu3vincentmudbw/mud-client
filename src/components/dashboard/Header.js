@@ -1,5 +1,4 @@
 import React from 'react';
-import LoginSignUpScreen from '../components/LoginSignUpScreen';
 
 const Header = (props) => {
 

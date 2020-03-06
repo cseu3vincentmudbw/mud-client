@@ -27,14 +27,16 @@ const Map=(props)=>{
 
     // ]
 
+    let x = Array(14).fill(0);
+
     const tiles = [
-    [0,0,0,0,0,0,0],
-    [0,0,1,0,0,0,0],
-    [0,0,3,0,1,0,0],
-    [0,0,1,2,1,0,0],
-    [0,0,3,0,0,0,0],
-    [0,0,1,0,0,0,0],
-    [0,0,0,0,0,0,0],
+     [0,0,0,0,0,0].concat(x),
+     [0,1,0,0,0,0].concat(x),
+     [0,3,0,0,0,0].concat(x),
+     [0,1,2,1,0,0].concat(x),
+     [0,3,0,3,0,0].concat(x),
+     [0,1,0,1,0,0].concat(x),
+     [0,0,0,0,0,0].concat(x),
     ]
 
 
@@ -54,7 +56,7 @@ function getTileSprite(type){
 }
     return (
         <>
-        {tiles.map((row, i)=>(
+        {tiles.reverse().map((row, i)=>(
             row.map((tile, i)=>(
                 
                 <div
