@@ -1,5 +1,4 @@
 import React from 'react';
-import LoginSignUpScreen from '../components/LoginSignUpScreen';
 
 const Header = (props) => {
 
@@ -11,7 +10,7 @@ const Header = (props) => {
   return (
     <div className="header">
 
-      <h2>LAMBDA MUD</h2>
+      <h2>LEGENDS MUD</h2>
 
       <button onClick={logout} className="logout-btn">
         Exit

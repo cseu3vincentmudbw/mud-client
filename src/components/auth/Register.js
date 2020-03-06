@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { SignupWrapperDiv } from "../../styles/userAuthStyles";
 import { LoaderDiv } from "../../styles/Loader";
 
+const baseUrl = `http://127.0.0.1:8000` 
+
+
 export default function Register(props) {
   const [unmatch, setUnmatch] = useState(false);
   const [clength, setClength] = useState(false);
@@ -44,7 +47,7 @@ export default function Register(props) {
         password2: password2Ref.current.value
       };
       axios
-        .post("https://legend-mud.herokuapp.com/api/registration/", user)
+        .post(`${baseUrl}/api/registration/`, user)
         .then(res => {
           setRequesting(false);
           localStorage.setItem("token", res.data.key);

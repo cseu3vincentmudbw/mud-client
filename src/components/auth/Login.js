@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { LoginWrapperDiv } from "../../styles/userAuthStyles";
 import { LoaderDiv } from "../../styles/Loader";
 
+const baseUrl = `http://127.0.0.1:8000` 
+
 export default function Login(props) {
   const [requesting, setRequesting] = useState(false);
 
@@ -20,7 +22,7 @@ export default function Login(props) {
       password: passwordRef.current.value
     };
     axios
-      .post("https://legend-mud.herokuapp.com/api/login/", user)
+      .post(`${baseUrl}/api/login/`, user)
       .then(res => {
         setRequesting(false);
         localStorage.setItem("token", res.data.key);

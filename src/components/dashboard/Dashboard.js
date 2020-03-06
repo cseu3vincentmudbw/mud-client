@@ -4,41 +4,41 @@ import { Card, Message } from "semantic-ui-react";
 import 'semantic-ui-css/semantic.css';
 import 'semantic-ui-css/semantic.min.css';
 import Header from './Header';
-import axiosWithAuth from "../axios/index";
-import Map from "../components/Map";
-import character from "../assets/character.png"
+import axiosWithAuth from "../../axios/index";
+//import Map from "../../components/Map";
 import Confetti from 'react-confetti';
 
-import Grid from './grid/Grid';
-
-//import World from "../components/World";
+// import World from "../../components/World";
+import Grid from '../../components/grid/Grid';
 
 import {
   useWindowSize
 } from '@react-hook/window-size'
 
-// const baseUrl = `https://legend-mud.herokuapp.com` 
-const baseUrl = `http://127.0.0.1:8000` 
 
-function Dashboard() {
+import './dashboard.styles.scss';
+
+import baseUrl from '../../utils.js';
+
+const Dashboard = () =>  {
 
   const [moveErrorMsg, setMoveErrorMsg] = useState();
+  const [direction, setDirection] = useState(null);
   const [moveInfo, setMoveInfo] = useState({
     uuid: "",
-    name: "",
     title: "",
+    x: "",
+    y: "",
     description: "",
     players: [],
     error_msg: ""
   })
 
-  const [pos, setPos] = useState([-760, 20])
   const { width, height } = useWindowSize();
 
   useEffect(() => {
-
     axiosWithAuth().get(
-      `${baseUrl}/api/adv/init`
+      `${baseUrl}/api/adv/init/`
     )
       .then(res => {
         console.log("init res", res.data);
@@ -52,90 +52,19 @@ function Dashboard() {
   }, []);
 
 
-  let increments = 80
   const Move = (dir) => {
-
     axiosWithAuth()
       .post(
         `${baseUrl}/api/adv/move/`, { direction: `${dir}` }
       )
       .then(res => {
-        console.log("move result", res.data);
-        setMoveInfo(res.data)
-        if (res.data.error_msg === "") {//if no error...
-          if (`${dir}` === "n") {//and direction is North
-            if (pos[1] + increments > 740) { //checking to see if we're off the map
-              console.log("WE'RE OFF THE MAP")
-              return
-            } else {//if not, set to new position
-              setPos([pos[0], pos[1] + increments])
-            }
-          } if (`${dir}` === "s") {//and direction is South
-            if (pos[1] - increments < 20) { //checking to see if we're off the map
-              console.log("You're off the map")
-              return
-            } else {//if not, set to new position
-              setPos([pos[0], pos[1] - increments])
-            }
-          } if (`${dir}` === "e") {
-            if (pos[0] + increments > -40) { //checking to see if we're off the map
-              console.log("Off the map")
-              return
-            } else {//if not, set to new position
-              setPos([pos[0] + increments, pos[1]])
-            }
-          } if (`${dir}` === "w") {
-            if (pos[0] - increments < -800) { //checking to see if we're off the map
-              console.log("Off the map")
-            } else {//if not, set to new position
-              setPos([pos[0] - increments, pos[1]])
-            }
-          }
-
-          console.log("CURRENT POSITION", pos)
-        }
-
+        setMoveInfo(res.data);
+        setDirection(dir);
       })
       .catch(error => {
         console.log(error.message);
       });
   }
-
-
-  document.onkeydown = checkKey;
-
-  function checkKey(e) {
-
-    console.log("KEY DOWN")
-    e = e || window.event;
-
-    if (e.keyCode == '38') {
-      Move("n")
-    }
-    else if (e.keyCode == '40') {
-      Move("s")
-    }
-    else if (e.keyCode == '37') {
-      Move("w")
-    }
-    else if (e.keyCode == '39') {
-      Move("e")
-    }
-    else if (e.keyCode == '78') {
-      Move("n")
-    }
-    else if (e.keyCode == '83') {
-      Move("s")
-    }
-    else if (e.keyCode == '69') {
-      Move("e")
-    }
-    else if (e.keyCode == '87') {
-      Move("w")
-    }
-
-  }
-
 
   return (
     <div className="dashboard-container" key="key">
@@ -143,10 +72,12 @@ function Dashboard() {
 
       <div className="dashboard-div" key="key">
 
-        <div className="map">
-          <Grid />
+        <div className="dashboard-grid-maze">
+          <Grid direction={direction} moveInfo={moveInfo} x={moveInfo.x} y={moveInfo.y}/>
+          
           <div className="confetti">
-            {moveInfo.title === "The Small Rift of Flame" ?
+            {
+              moveInfo.title === "The Small Rift of Flame" ?
               <div style={{ width: 50 }}>
                 <Confetti
                   width={width}
@@ -154,21 +85,11 @@ function Dashboard() {
                 />
               </div>
               :
-
-              null}
+              null
+            }
           </div>
 
-          <div className="charContainer">
-            <img 
-              src={character} 
-              className="char"
-              key="key"
-              alt="character"
-              style={{ bottom: pos[1] + "px", left: pos[0] + "px" }}>
-          </img>
-          </div>
-
-        </div>{/*end map*/}
+        </div>
 
         <div className="right-half">
 
