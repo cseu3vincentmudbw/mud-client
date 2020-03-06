@@ -19,16 +19,17 @@ import {
 import './dashboard.styles.scss';
 
 // const baseUrl = `https://legend-mud.herokuapp.com` 
-const baseUrl = `http://127.0.0.1:8000` 
+import baseUrl from '../../utils.js';
 
-function Dashboard() {
+const Dashboard = () =>  {
 
   const [moveErrorMsg, setMoveErrorMsg] = useState();
   const [direction, setDirection] = useState(null);
   const [moveInfo, setMoveInfo] = useState({
     uuid: "",
-    name: "",
     title: "",
+    x: "",
+    y: "",
     description: "",
     players: [],
     error_msg: ""
@@ -37,7 +38,6 @@ function Dashboard() {
   const { width, height } = useWindowSize();
 
   useEffect(() => {
-
     axiosWithAuth().get(
       `${baseUrl}/api/adv/init`
     )
@@ -67,44 +67,6 @@ function Dashboard() {
       });
   }
 
-  // const handleKeyPress = (e) => {
-  //   debugger
-  //   e = e || window.event;
-  //   if (e.keyCode == '38') {
-  //     Move("n");
-  //     setDirection('n');
-  //   }
-  //   else if (e.keyCode == '40') {
-  //     Move("s");
-  //     setDirection('s');
-  //   }
-  //   else if (e.keyCode == '37') {
-  //     Move("w");
-  //     setDirection('w');
-  //   }
-  //   else if (e.keyCode == '39') {
-  //     Move("e");
-  //     setDirection('s');
-  //   }
-  //   else if (e.keyCode == '78') {
-  //     Move("n");
-  //     setDirection('n');
-  //   }
-  //   else if (e.keyCode == '83') {
-  //     Move("s")
-  //     setDirection('s');
-  //   }
-  //   else if (e.keyCode == '69') {
-  //     Move("e");
-  //     setDirection('e');
-  //   }
-  //   else if (e.keyCode == '87') {
-  //     Move("w");
-  //     setDirection('w');
-  //   }
-  // }
-
-
   return (
     <div className="dashboard-container" key="key">
       <Header />
@@ -112,7 +74,8 @@ function Dashboard() {
       <div className="dashboard-div" key="key">
 
         <div className="dashboard-grid-maze">
-          <Grid direction={direction}/>
+          <Grid direction={direction} moveInfo={moveInfo} x={moveInfo.x} y={moveInfo.y}/>
+          
           <div className="confetti">
             {
               moveInfo.title === "The Small Rift of Flame" ?
@@ -127,7 +90,7 @@ function Dashboard() {
             }
           </div>
 
-        </div>{/*end maze*/}
+        </div>
 
         <div className="right-half">
 
