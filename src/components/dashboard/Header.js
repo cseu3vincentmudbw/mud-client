@@ -10,11 +10,11 @@ const Header = (props) => {
   return (
     <div className="header">
 
-      <h2>LEGENDS MUD</h2>
+      <h2>LEGENDS</h2>
 
-      <button onClick={logout} className="logout-btn">
-        Exit
-      </button>
+      <h2 onClick={logout} className="header-sign-out">
+        Sign Out
+      </h2>
 
     </div>
   );
