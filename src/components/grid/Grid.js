@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Character from './Character';
+
 import './grid.styles.scss';
 
 import DATA from './data';
@@ -121,6 +123,11 @@ class Grid extends React.Component {
         ))
       }
       </table>
+      <Character 
+        direction={this.props.direction} 
+        maze={this.gridArray}
+        handleKeyPress={this.props.handleKeyPress}
+      />
     </div>
     )
   }

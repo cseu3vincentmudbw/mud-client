@@ -3,11 +3,12 @@ import { Route } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyles";
 import PrivateRoute from "./components/PrivateRoute";
 // import Home from "./components/features/Home";
-import Dashboard from './components/Dashboard';
+//import Dashboard from './components/Dashboard';
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Navbar from "./components/layout/Navbar";
 import Player from "./components/features/Player";
+import Dashboard from './components/dashboard/Dashboard';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
