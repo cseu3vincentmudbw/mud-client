@@ -18,7 +18,6 @@ import {
 
 import './dashboard.styles.scss';
 
-// const baseUrl = `https://legend-mud.herokuapp.com` 
 import baseUrl from '../../utils.js';
 
 const Dashboard = () =>  {
@@ -39,7 +38,7 @@ const Dashboard = () =>  {
 
   useEffect(() => {
     axiosWithAuth().get(
-      `${baseUrl}/api/adv/init`
+      `${baseUrl}/api/adv/init/`
     )
       .then(res => {
         console.log("init res", res.data);
