@@ -1,0 +1,18 @@
+.nav-item {
+font-family: 'Jim Nightshade', cursive;
+font-size: 2.5rem;
+letter-spacing: 0.7px;
+}
+
+.auth-links {
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-nav {
+  display: block;
+  width: 100%;
+  padding-right: 5%;
+}

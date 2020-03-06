@@ -1,13 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { LoginWrapperDiv } from "../../styles/userAuthStyles";
 import { LoaderDiv } from "../../styles/Loader";
+import { AuthContext } from '../../contexts';
 
-const baseUrl = `http://127.0.0.1:8000` 
+import baseUrl from '../../utils';
 
 export default function Login(props) {
   const [requesting, setRequesting] = useState(false);
+  const [authState, dispatch] = useContext(AuthContext);
 
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
@@ -26,6 +28,7 @@ export default function Login(props) {
       .then(res => {
         setRequesting(false);
         localStorage.setItem("token", res.data.key);
+        dispatch({type: 'LOGIN'})
         window.location.href ="/";
       })
       .catch(err => {

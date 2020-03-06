@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { SignupWrapperDiv } from "../../styles/userAuthStyles";
 import { LoaderDiv } from "../../styles/Loader";
+import { AuthContext } from '../../contexts';
 
 const baseUrl = `http://127.0.0.1:8000` 
 
@@ -11,6 +12,7 @@ export default function Register(props) {
   const [unmatch, setUnmatch] = useState(false);
   const [clength, setClength] = useState(false);
   const [requesting, setRequesting] = useState(false);
+  const [authState, dispatch] = useContext(AuthContext);
 
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
@@ -52,6 +54,7 @@ export default function Register(props) {
           setRequesting(false);
           localStorage.setItem("token", res.data.key);
           window.location.href = "/";
+          dispatch({type: 'REGISTER'})
         })
         .catch(err => {
           setRequesting(false);

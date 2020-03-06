@@ -5,10 +5,8 @@ import 'semantic-ui-css/semantic.css';
 import 'semantic-ui-css/semantic.min.css';
 import Header from './Header';
 import axiosWithAuth from "../../axios/index";
-//import Map from "../../components/Map";
 import Confetti from 'react-confetti';
 
-// import World from "../../components/World";
 import Grid from '../../components/grid/Grid';
 
 import {
@@ -65,6 +63,38 @@ const Dashboard = () =>  {
         console.log(error.message);
       });
   }
+
+  const checkKey = (e) =>  {
+
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+      Move("n");
+    }
+    else if (e.keyCode == '40') {
+      Move("s");
+    }
+    else if (e.keyCode == '37') {
+      Move("w");
+    }
+    else if (e.keyCode == '39') {
+      Move("e");
+    }
+    else if (e.keyCode == '78') {
+      Move("n");
+    }
+    else if (e.keyCode == '83') {
+      Move("s");
+    }
+    else if (e.keyCode == '69') {
+      Move("e");
+    }
+    else if (e.keyCode == '87') {
+      Move("w");
+    }
+  }
+
+  document.onkeydown = checkKey;
 
   return (
     <div className="dashboard-container" key="key">
@@ -154,7 +184,6 @@ const Dashboard = () =>  {
               <div className="east-west">
                 <button className="west-btn" onClick={() => Move("w")}>WEST</button>
                 <button onClick={() => Move("e")}>EAST</button>
-
               </div>
 
               <div className="south">
@@ -170,10 +199,7 @@ const Dashboard = () =>  {
 
       </div>
 
-
     </div>);
-
-
 } 
 
 export default Dashboard;
